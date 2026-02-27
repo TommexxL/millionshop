@@ -1,31 +1,36 @@
 <?php
 include 'includes/header.php';
-$quotes = json_decode(file_get_contents("data/quotes.json"), true);
 
-$id = $_GET['id'] ?? null;
+if (!isset($_GET['id'])) {
+    header("Location: index.php");
+    exit;
+}
 
-foreach ($quotes as $quote) {
-    if ($quote['id'] == $id) {
-        $product = $quote;
+$products = json_decode(file_get_contents('assets/data.json'), true);
+
+$product = null;
+foreach ($products as $p) {
+    if ($p['id'] == $_GET['id']) {
+        $product = $p;
         break;
     }
 }
 
-if (!isset($product)) {
-    die("Product not found.");
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['cart'][] = $product;
-    header("Location: cart.php");
+if (!$product) {
+    header("Location: index.php");
     exit;
 }
 ?>
 
-<h1><?php echo htmlspecialchars($product['title']); ?></h1>
-<p><?php echo htmlspecialchars($product['author']); ?></p>
-<p>€<?php echo number_format($product['price'], 2); ?></p>
+<h2><?= htmlspecialchars($product['name']) ?></h2>
+<p><?= htmlspecialchars($product['description']) ?></p>
+<p><strong>€<?= number_format($product['price'], 2) ?></strong></p>
 
-<form method="POST">
-    <button type="submit">Add to Cart</button>
+<form method="post" action="cart.php">
+    <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+    <button type="submit" class="btn btn-primary">
+        Add to Cart
+    </button>
 </form>
+
+<?php include 'includes/footer.php'; ?>

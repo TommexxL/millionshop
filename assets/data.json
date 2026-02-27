@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Basic Thoughts",
+    "description": "A modest offering of contemplative goodwill.",
+    "price": 1.00,
+    "has_verse": false
+  },
+  {
+    "id": 2,
+    "name": "Premium Thoughts & Prayers",
+    "description": "Elevated intercessions, with a sacred verse included.",
+    "price": 5.00,
+    "has_verse": true
+  },
+  {
+    "id": 3,
+    "name": "Deluxe Eternal Blessing",
+    "description": "Our highest spiritual bandwidth, reverently dispatched.",
+    "price": 10.00,
+    "has_verse": false
+  }
+]

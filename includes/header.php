@@ -1,38 +1,29 @@
 <?php
 session_start();
+$cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thoughts and prayer shoppy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/style.css">
-    
+<meta charset="UTF-8">
+<title>Sanctified Thoughts & Prayers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="index.php">Home</a>
-                    <a class="nav-link" href="about.php">About</a>
-                    <a class="nav-link" href="order.php">Order</a>
-                    <a class="nav-link" href="contact.php">Contact</a>
-                    <a class="nav-link" href="logout.php">Logout</a>
-                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                        <a class="nav-link" href="admin.php">Admin</a>
-                    <?php endif; ?>
-                </div>
-                </div>
-                </div>
-            </div>
-        </nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<div class="container">
+    <a class="navbar-brand fw-bold" href="index.php">🙏 Sanctified Offerings</a>
+
+    <div class="ms-auto">
+        <a href="cart.php" class="btn btn-outline-secondary">
+            🛒 Cart (<?= $cartCount ?>)
+        </a>
     </div>
+</div>
+</nav>
+
+<div class="container mt-4">

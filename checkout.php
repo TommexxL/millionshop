@@ -1,21 +1,25 @@
 <?php
 include 'includes/header.php';
-$total = 0;
 
-foreach ($_SESSION['cart'] ?? [] as $item) {
+if (empty($_SESSION['cart'])) {
+    header("Location: cart.php");
+    exit;
+}
+
+$total = 0;
+foreach ($_SESSION['cart'] as $item) {
     $total += $item['price'];
 }
 ?>
 
-<h1>Checkout</h1>
-<p>Total: €<?php echo number_format($total, 2); ?></p>
+<h2>Final Benediction</h2>
+<p>You are about to complete your sacred contribution.</p>
 
-<!-- Ko-fi Payment Button -->
-<script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-<script>
-kofiwidget2.init('Pay €<?php echo number_format($total,2); ?>', '#29abe0', 'YOUR_KOFI_USERNAME');
-kofiwidget2.draw();
-</script>
+<p><strong>Total Offering: €<?= number_format($total,2) ?></strong></p>
 
-<p>After payment, you can manually redirect to success page.</p>
-<a href="success.php">I have paid</a>
+<a href="https://ko-fi.com/YOURPAGE?amount=<?= $total ?>&return_url=http://yourdomain.com/thankyou.php?paid=1"
+   class="btn btn-primary">
+   Proceed to Ko-fi
+</a>
+
+<?php include 'includes/footer.php'; ?>
